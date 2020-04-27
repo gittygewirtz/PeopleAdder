@@ -4,40 +4,31 @@ using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using PeopleAdder.Data;
 using PeopleAdder.Models;
 
 namespace PeopleAdder.Controllers
 {
     public class HomeController : Controller
     {
+        private string _conStr = "Data Source=.\\sqlexpress;Initial Catalog=MySecondDb;Integrated Security=True";
         public IActionResult Index()
         {
-            return View();
+            PeopleDb db = new PeopleDb(_conStr);
+            return View(db.GetPeople());
         }
-
-        public IActionResult About()
-        {
-            ViewData["Message"] = "Your application description page.";
-
-            return View();
-        }
-
-        public IActionResult Contact()
-        {
-            ViewData["Message"] = "Your contact page.";
-
-            return View();
-        }
-
-        public IActionResult Privacy()
+        public IActionResult AddPeopleForm()
         {
             return View();
         }
-
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
+        public IActionResult AddPerson(List<Person> ppl)
         {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+            PeopleDb db = new PeopleDb(_conStr);
+            foreach(Person p in ppl)
+            {
+                db.AddPerson(p);
+            }
+            return Redirect("/");
         }
     }
 }

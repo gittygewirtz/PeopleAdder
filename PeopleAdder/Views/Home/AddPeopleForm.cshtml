@@ -1,0 +1,27 @@
+﻿<div class="row">
+    <form method="post" action="/Home/AddPerson">
+        <div class="well">
+            <span id="0">
+                <div class="row">
+                    <div class="col-md-3">
+                        <input name="ppl[0].firstName" placeholder="First Name" class="form-control" />
+                    </div>
+                    <div class="col-md-3">
+                        <input name="ppl[0].lastName" placeholder="Last Name" class="form-control" />
+                    </div>
+                    <div class="col-md-3">
+                        <input name="ppl[0].age" placeholder="Age" class="form-control" />
+                    </div>
+                </div>
+            </span>
+            <br />
+            <button id="add-button" type="button" class="btn btn-primary">Add Another Person</button>
+        </div>
+        <br />
+        <button class="btn btn-success btn-block">Submit People</button>
+    </form>
+</div>
+
+@section Scripts{
+    <script src="~/js/AddPeopleForm.js"></script>
+}
